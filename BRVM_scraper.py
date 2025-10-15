@@ -1,20 +1,3 @@
-#import pandas as pd
-#import requests
-
-#def BRVM_get(symbols, from_date=None, to_date=None, verbose=False):
-#    # Exemple simple: retourne un DataFrame factice
-#    data = []
-#    for symbol in symbols:
-#        data.append({
-#            "symbol": symbol,
-#            "date": from_date if from_date else "2025-01-01",
-#            "price": 100,
-#            "volume": 1000
-#        })
-#    return pd.DataFrame(data)
-
-
-
 import requests
 import pandas as pd
 import time
@@ -245,6 +228,3 @@ def BRVM_get(symbols, from_date=None, to_date=None, verbose=True):
     if verbose:
         print("Finished. Processed tickers:", ", ".join(symbol_vec))
     return returns.reset_index(drop=True)
-
-data_bicc = BRVM_get(symbols=["BICC"], from_date="2024-01-01", to_date="2024-12-31", verbose=True)
-print(data_bicc.head())

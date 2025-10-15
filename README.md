@@ -1,26 +1,30 @@
-# BRVM API
+# API BRVM
 
-Cette API permet de récupérer des données de la BRVM et de les utiliser dans Excel ou autre.
+Cette API permet de récupérer les données boursières de la Bourse Régionale des Valeurs Mobilières (BRVM).
 
-## 🚀 Lancer en local
+## Déploiement sur Render.com
 
-```bash
-uvicorn brvm_api:app --reload
-```
+1. Créer un compte sur [render.com](https://render.com)
+2. Cliquer sur "New +" → "Web Service"
+3. Connecter votre repository GitHub
+4. Configuration :
+   - **Name**: `brvm-api` (ou le nom de votre choix)
+   - **Environment**: `Python 3`
+   - **Region**: Choisir la région la plus proche
+   - **Branch**: `main` (ou la branche principale)
+   - **Root Directory**: `brvm_api`
+   - **Build Command**: `pip install -r requirements.txt`
+   - **Start Command**: `uvicorn brvm_api:app --host 0.0.0.0 --port $PORT`
 
-## 🌍 Déploiement sur Render
+## Utilisation depuis Excel
 
-1. Créer un compte gratuit sur https://render.com
-2. Importer ce repo GitHub
-3. Configurer le service web :
-   - **Environment**: Python 3.11
-   - **Start Command**: `uvicorn brvm_api:app --host 0.0.0.0 --port 10000`
-4. Déployer 🚀
+### Méthode 1 : Power Query (Recommandé)
 
-## 🔗 Exemple d'appel
+1. Dans Excel, aller dans **Données** → **Obtenir des données** → **À partir d'autres sources** → **À partir du Web**
+2. Entrer l'URL de votre API : `https://votre-api.render.com/api/brvm?symbols=BICC,ABJC&from_date=2024-01-01&to_date=2024-12-31`
+3. Excel va détecter le JSON et vous pourrez transformer les données
 
-- JSON :  
-`https://votre-api.onrender.com/brvm?symbols=BOAB&from_date=2024-01-01&to_date=2024-12-31`
+### Méthode 2 : Fonction WEBSERVICE (Excel 365)
 
-- CSV :  
-`https://votre-api.onrender.com/brvm_csv?symbols=BOAB&from_date=2024-01-01&to_date=2024-12-31`
+```excel
+=WEBSERVICE("https://votre-api.render.com/api/brvm?symbols=BICC&from_date=2024-01-01")
